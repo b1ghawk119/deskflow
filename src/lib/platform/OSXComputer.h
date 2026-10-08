@@ -10,6 +10,7 @@
 
 #include "deskflow/PlatformComputer.h"
 #include "platform/OSXClipboard.h"
+#include "platform/OSXLocalModifiers.h"
 #include "platform/OSXPowerManager.h"
 
 #include <Carbon/Carbon.h>
@@ -254,6 +255,7 @@ private:
 
   // keyboard stuff
   OSXKeyState *m_keyState;
+  OSXLocalModifiers m_localModifiers;
 
   // clipboards
   OSXClipboard m_pasteboard;

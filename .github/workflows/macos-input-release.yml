@@ -1,0 +1,117 @@
+# SPDX-FileCopyrightText: (C) 2026 Deskflow Developers
+# SPDX-License-Identifier: MIT
+
+name: macOS Input Fix Release
+
+on:
+  push:
+    branches: [fix/macos-input]
+    tags: [mac-input-v*]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: macos-input-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: macOS ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-15
+            qt: 6.11.3
+            deployment: '14'
+          - arch: x86_64
+            runner: macos-15-intel
+            qt: 6.9.3
+            deployment: '12'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+        with:
+          qt-version: ${{ matrix.qt }}
+
+      - name: Configure
+        shell: bash
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release -DSKIP_BUILD_TESTS=ON \
+            -DCMAKE_OSX_ARCHITECTURES="${{ matrix.arch }}" \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET="${{ matrix.deployment }}" \
+            -DPACKAGE_VERSION_LABEL="mac-input-${GITHUB_SHA:0:8}"
+
+      - name: Build
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Test keyboard mapping
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: ctest --test-dir build/src/unittests --output-on-failure -R '^(OSXKeyMapFallbackTests|KeyMapTests|KeyStateTests|KeyboardLayoutManagerTests)$'
+
+      - name: Package
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            if cmake --build build --config Release --target package; then
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: deskflow-macos-${{ matrix.arch }}
+          path: build/deskflow*.dmg
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: deskflow-macos-*
+          path: dist
+          merge-multiple: true
+
+      - name: Checksums and release notes
+        shell: bash
+        run: |
+          cd dist
+          sha256sum *.dmg > SHA256SUMS.txt
+          cat > release-notes.md <<'NOTES'
+          macOS client fixes for IME character mapping and local Shift/Command with a shared mouse.
+
+          Keep "Use server's keyboard language on this computer" disabled when using different input methods on Windows and Mac.
+          Allow Deskflow and deskflow-core in Accessibility and Input Monitoring if macOS requests access.
+
+          These installers are ad-hoc signed, without Apple notarization. They require testing with the actual Sogou input method and local keyboard.
+          NOTES
+
+      - name: Publish installers
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: mac-input-build-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: Deskflow macOS input fix build ${{ github.run_number }}
+          prerelease: true
+          make_latest: false
+          body_path: dist/release-notes.md
+          files: |
+            dist/*.dmg
+            dist/SHA256SUMS.txt

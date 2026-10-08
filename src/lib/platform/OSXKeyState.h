@@ -91,6 +91,9 @@ protected:
   void getKeyMap(deskflow::KeyMap &keyMap) override;
   void fakeKey(const Keystroke &keystroke) override;
 
+  // Overridable so tests can exercise an IME-only input-source list.
+  virtual bool getGroups(AutoCFArray &) const;
+
 private:
   class KeyResource;
 
@@ -99,9 +102,6 @@ private:
 
   // Convert keyboard resource to a key map
   bool getKeyMap(deskflow::KeyMap &keyMap, int32_t group, const IOSXKeyResource &r) const;
-
-  // Get the available keyboard groups
-  bool getGroups(AutoCFArray &) const;
 
   // Change active keyboard group to group
   void setGroup(int32_t group);
@@ -150,7 +150,7 @@ private:
     KeyButtonOffset = 1
   };
 
-  using GroupMap = std::map<CFDataRef, int32_t>;
+  using GroupMap = std::map<std::string, int32_t>;
   using VirtualKeyMap = std::map<uint32_t, KeyID>;
 
   VirtualKeyMap m_virtualKeyMap;
