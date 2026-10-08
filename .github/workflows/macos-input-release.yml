@@ -20,6 +20,8 @@ jobs:
   build:
     name: macOS ${{ matrix.arch }}
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: write
     timeout-minutes: 35
     strategy:
       fail-fast: false
@@ -49,15 +51,17 @@ jobs:
           cmake -B build -DCMAKE_BUILD_TYPE=Release -DSKIP_BUILD_TESTS=ON \
             -DCMAKE_OSX_ARCHITECTURES="${{ matrix.arch }}" \
             -DCMAKE_OSX_DEPLOYMENT_TARGET="${{ matrix.deployment }}" \
-            -DPACKAGE_VERSION_LABEL="mac-input-${GITHUB_SHA:0:8}"
+            -DPACKAGE_VERSION_LABEL="mac-input-${GITHUB_SHA:0:8}" 2>&1 | tee configure.log
 
       - name: Build
-        run: cmake --build build --config Release --parallel 4
+        shell: bash
+        run: cmake --build build --config Release --parallel 4 2>&1 | tee build.log
 
       - name: Test keyboard mapping
         env:
           QT_QPA_PLATFORM: offscreen
-        run: ctest --test-dir build/src/unittests --output-on-failure -R '^(OSXKeyMapFallbackTests|KeyMapTests|KeyStateTests|KeyboardLayoutManagerTests)$'
+        shell: bash
+        run: ctest --test-dir build/src/unittests --output-on-failure -R '^(OSXKeyMapFallbackTests|KeyMapTests|KeyStateTests|KeyboardLayoutManagerTests)$' 2>&1 | tee tests.log
 
       - name: Package
         shell: bash
@@ -69,6 +73,20 @@ jobs:
             sleep 2
           done
           exit 1
+
+      - name: Save failure diagnostics
+        if: failure()
+        shell: bash
+        run: |
+          mkdir -p diagnostics
+          for file in configure.log build.log tests.log; do
+            if [ -f "$file" ]; then cp "$file" diagnostics/; fi
+          done
+          if [ -z "$(ls -A diagnostics)" ]; then exit 0; fi
+          git add -f diagnostics
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "Build diagnostics for run ${GITHUB_RUN_ID} (${{ matrix.arch }})"
+          git push origin "HEAD:refs/heads/build-log-${GITHUB_RUN_ID}-${{ matrix.arch }}"
 
       - name: Upload installer
         uses: actions/upload-artifact@v4

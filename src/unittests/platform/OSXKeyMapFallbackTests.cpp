@@ -14,6 +14,7 @@
 class IMEOnlyKeyState : public OSXKeyState
 {
 public:
+  using KeyState::getButton;
   using OSXKeyState::OSXKeyState;
   mutable bool foundIME = false;
 
