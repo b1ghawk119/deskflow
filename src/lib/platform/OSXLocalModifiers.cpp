@@ -10,6 +10,7 @@
 
 #include <IOKit/hid/IOHIDKeys.h>
 #include <IOKit/hid/IOHIDUsageTables.h>
+#include <IOKit/hidsystem/IOHIDLib.h>
 
 void OSXLocalModifiers::start(CFRunLoopRef runLoop)
 {
