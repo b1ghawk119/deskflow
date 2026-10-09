@@ -10,7 +10,6 @@
 
 #include <IOKit/hid/IOHIDKeys.h>
 #include <IOKit/hid/IOHIDUsageTables.h>
-#include <IOKit/hidsystem/IOHIDLib.h>
 
 void OSXLocalModifiers::start(CFRunLoopRef runLoop)
 {
@@ -66,18 +65,13 @@ void OSXLocalModifiers::stop(CFRunLoopRef runLoop)
   }
 }
 
-CGEventFlags OSXLocalModifiers::flags(bool diagnose) const
+CGEventFlags OSXLocalModifiers::flags() const
 {
   std::lock_guard<std::mutex> lock(m_mutex);
-  if (!m_manager) {
-    if (diagnose)
-      LOG_INFO("local-modifiers: HID manager is not running");
+  if (!m_manager)
     return 0;
-  }
   CFSetRef devices = IOHIDManagerCopyDevices(m_manager);
   if (!devices) {
-    if (diagnose)
-      LOG_INFO("local-modifiers: no matching keyboard devices");
     clearDevices();
     return 0;
   }
@@ -101,19 +95,6 @@ CGEventFlags OSXLocalModifiers::flags(bool diagnose) const
             usage <= kHIDUsage_KeyboardRightGUI)
           CFArrayAppendValue(modifiers, element);
       }
-      unsigned int miscModifiers = 0;
-      for (CFIndex i = 0; i < CFArrayGetCount(all); ++i) {
-        auto element = static_cast<IOHIDElementRef>(const_cast<void *>(CFArrayGetValueAtIndex(all, i)));
-        const auto usage = IOHIDElementGetUsage(element);
-        if (IOHIDElementGetType(element) == kIOHIDElementTypeInput_Misc &&
-            IOHIDElementGetUsagePage(element) == kHIDPage_KeyboardOrKeypad && usage >= kHIDUsage_KeyboardLeftControl &&
-            usage <= kHIDUsage_KeyboardRightGUI)
-          ++miscModifiers;
-      }
-      LOG_INFO(
-          "local-modifiers: keyboard elements=%ld selected-modifiers=%ld misc-modifiers=%u",
-          static_cast<long>(CFArrayGetCount(all)), static_cast<long>(CFArrayGetCount(modifiers)), miscModifiers
-      );
       CFRelease(all);
       m_keyboards.push_back({device, modifiers});
     }
@@ -125,29 +106,14 @@ CGEventFlags OSXLocalModifiers::flags(bool diagnose) const
       kCGEventFlagMaskControl, kCGEventFlagMaskShift, kCGEventFlagMaskAlternate, kCGEventFlagMaskCommand
   };
   CGEventFlags result = 0;
-  unsigned int elements = 0;
-  unsigned int failures = 0;
-  IOReturn lastError = kIOReturnSuccess;
   for (const auto &keyboard : m_keyboards) {
     for (CFIndex i = 0; i < CFArrayGetCount(keyboard.elements); ++i) {
       auto element = static_cast<IOHIDElementRef>(const_cast<void *>(CFArrayGetValueAtIndex(keyboard.elements, i)));
       IOHIDValueRef value = nullptr;
-      ++elements;
-      const auto status = IOHIDDeviceGetValue(keyboard.device, element, &value);
-      if (status != kIOReturnSuccess || !value) {
-        ++failures;
-        lastError = status;
-      } else if (IOHIDValueGetIntegerValue(value) != 0) {
+      if (IOHIDDeviceGetValue(keyboard.device, element, &value) == kIOReturnSuccess && value &&
+          IOHIDValueGetIntegerValue(value) != 0)
         result |= modifierFlags[(IOHIDElementGetUsage(element) - kHIDUsage_KeyboardLeftControl) % 4];
-      }
     }
-  }
-  if (diagnose) {
-    LOG_INFO(
-        "local-modifiers: keyboards=%zu elements=%u failures=%u last-error=0x%x flags=0x%llx listen-access=%d",
-        m_keyboards.size(), elements, failures, static_cast<unsigned int>(lastError),
-        static_cast<unsigned long long>(result), static_cast<int>(IOHIDCheckAccess(kIOHIDRequestTypeListenEvent))
-    );
   }
   return result;
 }

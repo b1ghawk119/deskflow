@@ -575,19 +575,7 @@ void OSXComputer::fakeMouseButton(ButtonID id, bool press)
   CGEventSetIntegerValueField(event, kCGMouseEventClickState, m_clickState);
 
   // Fix for sticky keys
-  const bool diagnose = press && m_modifierDiagnosticClicks < 40;
-  const auto remoteModifiers = m_keyState->getModifierStateAsOSXFlags();
-  const auto localModifiers = m_localModifiers.flags(diagnose);
-  CGEventFlags modifiers = remoteModifiers | localModifiers;
-  if (diagnose) {
-    ++m_modifierDiagnosticClicks;
-    LOG_INFO(
-        "local-modifiers: click=%u button=%u remote=0x%llx local=0x%llx combined=0x%llx quartz=0x%llx",
-        m_modifierDiagnosticClicks, static_cast<unsigned int>(id), static_cast<unsigned long long>(remoteModifiers),
-        static_cast<unsigned long long>(localModifiers), static_cast<unsigned long long>(modifiers),
-        static_cast<unsigned long long>(CGEventSourceFlagsState(kCGEventSourceStateHIDSystemState))
-    );
-  }
+  CGEventFlags modifiers = m_keyState->getModifierStateAsOSXFlags() | m_localModifiers.flags();
   CGEventSetFlags(event, modifiers);
 
   m_buttonState.set(index, state);

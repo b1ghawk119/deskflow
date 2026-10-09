@@ -109,8 +109,8 @@ jobs:
           cd dist
           sha256sum *.dmg > SHA256SUMS.txt
           cat > release-notes.md <<'NOTES'
-          ARM64 diagnostic build for local modifiers with a shared mouse.
-          At Info level, the first 40 mouse presses log HID access, device/element counts and modifier flags.
+          ARM64 build with fixes for IME keyboard mapping and local modifiers with a shared mouse.
+          Temporary mouse-click and HID modifier diagnostic logging has been removed.
 
           Keep "Use server's keyboard language on this computer" disabled when using different input methods on Windows and Mac.
           Allow Deskflow and deskflow-core in Accessibility and Input Monitoring if macOS requests access.

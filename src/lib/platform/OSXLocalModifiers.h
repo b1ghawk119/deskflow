@@ -19,7 +19,7 @@ class OSXLocalModifiers
 public:
   void start(CFRunLoopRef runLoop);
   void stop(CFRunLoopRef runLoop);
-  CGEventFlags flags(bool diagnose = false) const;
+  CGEventFlags flags() const;
 
 private:
   struct Keyboard

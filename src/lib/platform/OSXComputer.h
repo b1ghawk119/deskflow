@@ -256,7 +256,6 @@ private:
   // keyboard stuff
   OSXKeyState *m_keyState;
   OSXLocalModifiers m_localModifiers;
-  unsigned int m_modifierDiagnosticClicks = 0;
 
   // clipboards
   OSXClipboard m_pasteboard;
