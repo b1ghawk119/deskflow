@@ -1,0 +1,456 @@
+[  0%] Built target docs
+[  4%] Built target app_translations
+[  4%] Built target common_autogen_timestamp_deps
+[  4%] Built target common_autogen
+[  6%] Built target common
+[  6%] Built target arch_autogen_timestamp_deps
+[  7%] Built target arch_autogen
+[  9%] Built target arch
+[  9%] Built target base_autogen_timestamp_deps
+[ 10%] Built target base_autogen
+[ 13%] Built target base
+[ 13%] Built target client_autogen_timestamp_deps
+[ 14%] Built target client_autogen
+[ 15%] Built target client
+[ 15%] Built target mt_autogen_timestamp_deps
+[ 15%] Built target mt_autogen
+[ 17%] Built target mt
+[ 17%] Built target io_autogen_timestamp_deps
+[ 17%] Built target io_autogen
+[ 19%] Built target io
+[ 19%] Built target net_autogen_timestamp_deps
+[ 19%] Built target net_autogen
+[ 24%] Built target net
+[ 24%] Built target platform_autogen_timestamp_deps
+[ 24%] Built target app_autogen_timestamp_deps
+[ 24%] Built target app_autogen
+[ 25%] Built target platform_autogen
+[ 31%] Built target platform
+[ 40%] Built target app
+[ 40%] Built target server_autogen_timestamp_deps
+[ 41%] Built target server_autogen
+[ 46%] Built target server
+[ 46%] Built target gui_autogen_timestamp_deps
+[ 46%] Built target gui_autogen
+[ 60%] Built target gui
+[ 60%] Built target deskflow-core_autogen_timestamp_deps
+[ 60%] Built target deskflow-core_autogen
+[ 62%] Built target deskflow-core
+[ 62%] Built target Deskflow_autogen_timestamp_deps
+[ 62%] Built target Deskflow_autogen
+[ 63%] Built target Deskflow
+[ 63%] Built target ArchTests_autogen_timestamp_deps
+[ 63%] Built target ArchTests_autogen
+[ 64%] Built target ArchTests
+[ 64%] Built target ArchNetworkTests_autogen_timestamp_deps
+[ 65%] Built target ArchNetworkTests_autogen
+[ 65%] Built target ArchNetworkTests
+[ 65%] Built target StringTests_autogen_timestamp_deps
+[ 65%] Built target StringTests_autogen
+[ 66%] Built target StringTests
+[ 66%] Built target UnicodeTests_autogen_timestamp_deps
+[ 67%] Built target UnicodeTests_autogen
+[ 68%] Built target UnicodeTests
+[ 68%] Built target LogTests_autogen_timestamp_deps
+[ 68%] Built target LogTests_autogen
+[ 69%] Built target LogTests
+[ 69%] Built target FileLogOutputterTests_autogen_timestamp_deps
+[ 70%] Built target FileLogOutputterTests_autogen
+[ 70%] Built target FileLogOutputterTests
+[ 70%] Built target BaseExceptionTests_autogen_timestamp_deps
+[ 70%] Built target BaseExceptionTests_autogen
+[ 71%] Built target BaseExceptionTests
+[ 71%] Built target EventQueueTests_autogen_timestamp_deps
+[ 72%] Built target EventQueueTests_autogen
+[ 73%] Built target EventQueueTests
+[ 73%] Built target ServerProxyTests_autogen_timestamp_deps
+[ 73%] Built target ServerProxyTests_autogen
+[ 74%] Built target ServerProxyTests
+[ 74%] Built target SettingsTests_autogen_timestamp_deps
+[ 74%] Built target SettingsTests_autogen
+[ 75%] Built target SettingsTests
+[ 75%] Built target LogLevelTests_autogen_timestamp_deps
+[ 75%] Built target LogLevelTests_autogen
+[ 76%] Built target LogLevelTests
+[ 76%] Built target I18NTests_autogen_timestamp_deps
+[ 76%] Built target I18NTests_autogen
+[ 77%] Built target I18NTests
+[ 77%] Built target KeySequenceTests_autogen_timestamp_deps
+[ 77%] Built target KeySequenceTests_autogen
+[ 78%] Built target KeySequenceTests
+[ 78%] Built target ClipboardTests_autogen_timestamp_deps
+[ 79%] Built target ClipboardTests_autogen
+[ 80%] Built target ClipboardTests
+[ 80%] Built target ClipboardChunksTests_autogen_timestamp_deps
+[ 80%] Built target ClipboardChunksTests_autogen
+[ 81%] Built target ClipboardChunksTests
+[ 81%] Built target IKeyStateTests_autogen_timestamp_deps
+[ 81%] Built target IKeyStateTests_autogen
+[ 82%] Built target IKeyStateTests
+[ 82%] Built target KeyMapTests_autogen_timestamp_deps
+[ 83%] Built target KeyMapTests_autogen
+[ 84%] Built target KeyMapTests
+[ 84%] Built target KeyStateTests_autogen_timestamp_deps
+[ 84%] Built target KeyStateTests_autogen
+[ 85%] Built target KeyStateTests
+[ 85%] Built target KeyboardLayoutManagerTests_autogen_timestamp_deps
+[ 85%] Built target KeyboardLayoutManagerTests_autogen
+[ 86%] Built target KeyboardLayoutManagerTests
+[ 86%] Built target LoggerTests_autogen_timestamp_deps
+[ 87%] Built target LoggerTests_autogen
+[ 88%] Built target LoggerTests
+[ 88%] Built target ComputerTests_autogen_timestamp_deps
+[ 89%] Built target ComputerTests_autogen
+[ 89%] Built target ComputerTests
+[ 89%] Built target NetworkMonitorTests_autogen_timestamp_deps
+[ 89%] Built target NetworkMonitorTests_autogen
+[ 90%] Built target NetworkMonitorTests
+[ 90%] Built target SecureUtilsTests_autogen_timestamp_deps
+[ 90%] Built target SecureUtilsTests_autogen
+[ 91%] Built target SecureUtilsTests
+[ 91%] Built target FingerprintTests_autogen_timestamp_deps
+[ 91%] Built target FingerprintTests_autogen
+[ 92%] Built target FingerprintTests
+[ 92%] Built target FingerprintDatabaseTests_autogen_timestamp_deps
+[ 92%] Built target FingerprintDatabaseTests_autogen
+[ 93%] Built target FingerprintDatabaseTests
+[ 93%] Built target OSXKeyMapFallbackTests_autogen_timestamp_deps
+[ 93%] Built target OSXKeyMapFallbackTests_autogen
+[ 94%] Built target OSXKeyMapFallbackTests
+[ 94%] Built target OSXClipboardTests_autogen_timestamp_deps
+[ 94%] Built target OSXClipboardTests_autogen
+[ 95%] Built target OSXClipboardTests
+[ 95%] Built target OSXKeyStateTests_autogen_timestamp_deps
+[ 95%] Built target OSXKeyStateTests_autogen
+[ 96%] Built target OSXKeyStateTests
+[ 96%] Built target ServerConfigTests_autogen_timestamp_deps
+[ 97%] Built target ServerConfigTests_autogen
+[ 98%] Built target ServerConfigTests
+[ 98%] Built target ServerTests_autogen_timestamp_deps
+[ 98%] Built target ServerTests_autogen
+[ 99%] Built target ServerTests
+[ 99%] Built target ClientProxyTests_autogen_timestamp_deps
+[ 99%] Built target ClientProxyTests_autogen
+[100%] Built target ClientProxyTests
+Run CPack packaging tool...
+CPack: Create package using DragNDrop
+CPack: Install projects
+CPack: - Run preinstall target for: deskflow
+CPack: - Install project: deskflow []
+designated => identifier "deskflow-core" and anchor "/Users/runner/work/deskflow/deskflow/deploy/mac/input-build-signing.cer": No such file or directory
+invalid requirement specification
+CMake Error at /Users/runner/work/deskflow/deskflow/build/deploy/cmake_install.cmake:50 (execute_process):
+  execute_process failed command indexes:
+
+    1: "Child return code: 1"
+
+Call Stack (most recent call first):
+  /Users/runner/work/deskflow/deskflow/build/cmake_install.cmake:65 (include)
+
+
+CPack Error: Error when generating package: deskflow
+make: *** [package] Error 1
+[  0%] Built target docs
+[  4%] Built target app_translations
+[  4%] Built target common_autogen_timestamp_deps
+[  4%] Built target common_autogen
+[  6%] Built target common
+[  6%] Built target arch_autogen_timestamp_deps
+[  7%] Built target arch_autogen
+[  9%] Built target arch
+[  9%] Built target base_autogen_timestamp_deps
+[ 10%] Built target base_autogen
+[ 13%] Built target base
+[ 13%] Built target client_autogen_timestamp_deps
+[ 14%] Built target client_autogen
+[ 15%] Built target client
+[ 15%] Built target mt_autogen_timestamp_deps
+[ 15%] Built target mt_autogen
+[ 17%] Built target mt
+[ 17%] Built target io_autogen_timestamp_deps
+[ 17%] Built target io_autogen
+[ 19%] Built target io
+[ 19%] Built target net_autogen_timestamp_deps
+[ 19%] Built target net_autogen
+[ 24%] Built target net
+[ 24%] Built target platform_autogen_timestamp_deps
+[ 24%] Built target app_autogen_timestamp_deps
+[ 24%] Built target app_autogen
+[ 25%] Built target platform_autogen
+[ 31%] Built target platform
+[ 40%] Built target app
+[ 40%] Built target server_autogen_timestamp_deps
+[ 41%] Built target server_autogen
+[ 46%] Built target server
+[ 46%] Built target gui_autogen_timestamp_deps
+[ 46%] Built target gui_autogen
+[ 60%] Built target gui
+[ 60%] Built target deskflow-core_autogen_timestamp_deps
+[ 60%] Built target deskflow-core_autogen
+[ 62%] Built target deskflow-core
+[ 62%] Built target Deskflow_autogen_timestamp_deps
+[ 62%] Built target Deskflow_autogen
+[ 63%] Built target Deskflow
+[ 63%] Built target ArchTests_autogen_timestamp_deps
+[ 63%] Built target ArchTests_autogen
+[ 64%] Built target ArchTests
+[ 64%] Built target ArchNetworkTests_autogen_timestamp_deps
+[ 65%] Built target ArchNetworkTests_autogen
+[ 65%] Built target ArchNetworkTests
+[ 65%] Built target StringTests_autogen_timestamp_deps
+[ 65%] Built target StringTests_autogen
+[ 66%] Built target StringTests
+[ 66%] Built target UnicodeTests_autogen_timestamp_deps
+[ 67%] Built target UnicodeTests_autogen
+[ 68%] Built target UnicodeTests
+[ 68%] Built target LogTests_autogen_timestamp_deps
+[ 68%] Built target LogTests_autogen
+[ 69%] Built target LogTests
+[ 69%] Built target FileLogOutputterTests_autogen_timestamp_deps
+[ 70%] Built target FileLogOutputterTests_autogen
+[ 70%] Built target FileLogOutputterTests
+[ 70%] Built target BaseExceptionTests_autogen_timestamp_deps
+[ 70%] Built target BaseExceptionTests_autogen
+[ 71%] Built target BaseExceptionTests
+[ 71%] Built target EventQueueTests_autogen_timestamp_deps
+[ 72%] Built target EventQueueTests_autogen
+[ 73%] Built target EventQueueTests
+[ 73%] Built target ServerProxyTests_autogen_timestamp_deps
+[ 73%] Built target ServerProxyTests_autogen
+[ 74%] Built target ServerProxyTests
+[ 74%] Built target SettingsTests_autogen_timestamp_deps
+[ 74%] Built target SettingsTests_autogen
+[ 75%] Built target SettingsTests
+[ 75%] Built target LogLevelTests_autogen_timestamp_deps
+[ 75%] Built target LogLevelTests_autogen
+[ 76%] Built target LogLevelTests
+[ 76%] Built target I18NTests_autogen_timestamp_deps
+[ 76%] Built target I18NTests_autogen
+[ 77%] Built target I18NTests
+[ 77%] Built target KeySequenceTests_autogen_timestamp_deps
+[ 77%] Built target KeySequenceTests_autogen
+[ 78%] Built target KeySequenceTests
+[ 78%] Built target ClipboardTests_autogen_timestamp_deps
+[ 79%] Built target ClipboardTests_autogen
+[ 80%] Built target ClipboardTests
+[ 80%] Built target ClipboardChunksTests_autogen_timestamp_deps
+[ 80%] Built target ClipboardChunksTests_autogen
+[ 81%] Built target ClipboardChunksTests
+[ 81%] Built target IKeyStateTests_autogen_timestamp_deps
+[ 81%] Built target IKeyStateTests_autogen
+[ 82%] Built target IKeyStateTests
+[ 82%] Built target KeyMapTests_autogen_timestamp_deps
+[ 83%] Built target KeyMapTests_autogen
+[ 84%] Built target KeyMapTests
+[ 84%] Built target KeyStateTests_autogen_timestamp_deps
+[ 84%] Built target KeyStateTests_autogen
+[ 85%] Built target KeyStateTests
+[ 85%] Built target KeyboardLayoutManagerTests_autogen_timestamp_deps
+[ 85%] Built target KeyboardLayoutManagerTests_autogen
+[ 86%] Built target KeyboardLayoutManagerTests
+[ 86%] Built target LoggerTests_autogen_timestamp_deps
+[ 87%] Built target LoggerTests_autogen
+[ 88%] Built target LoggerTests
+[ 88%] Built target ComputerTests_autogen_timestamp_deps
+[ 89%] Built target ComputerTests_autogen
+[ 89%] Built target ComputerTests
+[ 89%] Built target NetworkMonitorTests_autogen_timestamp_deps
+[ 89%] Built target NetworkMonitorTests_autogen
+[ 90%] Built target NetworkMonitorTests
+[ 90%] Built target SecureUtilsTests_autogen_timestamp_deps
+[ 90%] Built target SecureUtilsTests_autogen
+[ 91%] Built target SecureUtilsTests
+[ 91%] Built target FingerprintTests_autogen_timestamp_deps
+[ 91%] Built target FingerprintTests_autogen
+[ 92%] Built target FingerprintTests
+[ 92%] Built target FingerprintDatabaseTests_autogen_timestamp_deps
+[ 92%] Built target FingerprintDatabaseTests_autogen
+[ 93%] Built target FingerprintDatabaseTests
+[ 93%] Built target OSXKeyMapFallbackTests_autogen_timestamp_deps
+[ 93%] Built target OSXKeyMapFallbackTests_autogen
+[ 94%] Built target OSXKeyMapFallbackTests
+[ 94%] Built target OSXClipboardTests_autogen_timestamp_deps
+[ 94%] Built target OSXClipboardTests_autogen
+[ 95%] Built target OSXClipboardTests
+[ 95%] Built target OSXKeyStateTests_autogen_timestamp_deps
+[ 95%] Built target OSXKeyStateTests_autogen
+[ 96%] Built target OSXKeyStateTests
+[ 96%] Built target ServerConfigTests_autogen_timestamp_deps
+[ 97%] Built target ServerConfigTests_autogen
+[ 98%] Built target ServerConfigTests
+[ 98%] Built target ServerTests_autogen_timestamp_deps
+[ 98%] Built target ServerTests_autogen
+[ 99%] Built target ServerTests
+[ 99%] Built target ClientProxyTests_autogen_timestamp_deps
+[ 99%] Built target ClientProxyTests_autogen
+[100%] Built target ClientProxyTests
+Run CPack packaging tool...
+CPack: Create package using DragNDrop
+CPack: Install projects
+CPack: - Run preinstall target for: deskflow
+CPack: - Install project: deskflow []
+designated => identifier "deskflow-core" and anchor "/Users/runner/work/deskflow/deskflow/deploy/mac/input-build-signing.cer": No such file or directory
+invalid requirement specification
+CMake Error at /Users/runner/work/deskflow/deskflow/build/deploy/cmake_install.cmake:50 (execute_process):
+  execute_process failed command indexes:
+
+    1: "Child return code: 1"
+
+Call Stack (most recent call first):
+  /Users/runner/work/deskflow/deskflow/build/cmake_install.cmake:65 (include)
+
+
+CPack Error: Error when generating package: deskflow
+make: *** [package] Error 1
+[  0%] Built target docs
+[  4%] Built target app_translations
+[  4%] Built target common_autogen_timestamp_deps
+[  4%] Built target common_autogen
+[  6%] Built target common
+[  6%] Built target arch_autogen_timestamp_deps
+[  7%] Built target arch_autogen
+[  9%] Built target arch
+[  9%] Built target base_autogen_timestamp_deps
+[ 10%] Built target base_autogen
+[ 13%] Built target base
+[ 13%] Built target client_autogen_timestamp_deps
+[ 14%] Built target client_autogen
+[ 15%] Built target client
+[ 15%] Built target mt_autogen_timestamp_deps
+[ 15%] Built target mt_autogen
+[ 17%] Built target mt
+[ 17%] Built target io_autogen_timestamp_deps
+[ 17%] Built target io_autogen
+[ 19%] Built target io
+[ 19%] Built target net_autogen_timestamp_deps
+[ 19%] Built target net_autogen
+[ 24%] Built target net
+[ 24%] Built target platform_autogen_timestamp_deps
+[ 24%] Built target app_autogen_timestamp_deps
+[ 24%] Built target app_autogen
+[ 25%] Built target platform_autogen
+[ 31%] Built target platform
+[ 40%] Built target app
+[ 40%] Built target server_autogen_timestamp_deps
+[ 41%] Built target server_autogen
+[ 46%] Built target server
+[ 46%] Built target gui_autogen_timestamp_deps
+[ 46%] Built target gui_autogen
+[ 60%] Built target gui
+[ 60%] Built target deskflow-core_autogen_timestamp_deps
+[ 60%] Built target deskflow-core_autogen
+[ 62%] Built target deskflow-core
+[ 62%] Built target Deskflow_autogen_timestamp_deps
+[ 62%] Built target Deskflow_autogen
+[ 63%] Built target Deskflow
+[ 63%] Built target ArchTests_autogen_timestamp_deps
+[ 63%] Built target ArchTests_autogen
+[ 64%] Built target ArchTests
+[ 64%] Built target ArchNetworkTests_autogen_timestamp_deps
+[ 65%] Built target ArchNetworkTests_autogen
+[ 65%] Built target ArchNetworkTests
+[ 65%] Built target StringTests_autogen_timestamp_deps
+[ 65%] Built target StringTests_autogen
+[ 66%] Built target StringTests
+[ 66%] Built target UnicodeTests_autogen_timestamp_deps
+[ 67%] Built target UnicodeTests_autogen
+[ 68%] Built target UnicodeTests
+[ 68%] Built target LogTests_autogen_timestamp_deps
+[ 68%] Built target LogTests_autogen
+[ 69%] Built target LogTests
+[ 69%] Built target FileLogOutputterTests_autogen_timestamp_deps
+[ 70%] Built target FileLogOutputterTests_autogen
+[ 70%] Built target FileLogOutputterTests
+[ 70%] Built target BaseExceptionTests_autogen_timestamp_deps
+[ 70%] Built target BaseExceptionTests_autogen
+[ 71%] Built target BaseExceptionTests
+[ 71%] Built target EventQueueTests_autogen_timestamp_deps
+[ 72%] Built target EventQueueTests_autogen
+[ 73%] Built target EventQueueTests
+[ 73%] Built target ServerProxyTests_autogen_timestamp_deps
+[ 73%] Built target ServerProxyTests_autogen
+[ 74%] Built target ServerProxyTests
+[ 74%] Built target SettingsTests_autogen_timestamp_deps
+[ 74%] Built target SettingsTests_autogen
+[ 75%] Built target SettingsTests
+[ 75%] Built target LogLevelTests_autogen_timestamp_deps
+[ 75%] Built target LogLevelTests_autogen
+[ 76%] Built target LogLevelTests
+[ 76%] Built target I18NTests_autogen_timestamp_deps
+[ 76%] Built target I18NTests_autogen
+[ 77%] Built target I18NTests
+[ 77%] Built target KeySequenceTests_autogen_timestamp_deps
+[ 77%] Built target KeySequenceTests_autogen
+[ 78%] Built target KeySequenceTests
+[ 78%] Built target ClipboardTests_autogen_timestamp_deps
+[ 79%] Built target ClipboardTests_autogen
+[ 80%] Built target ClipboardTests
+[ 80%] Built target ClipboardChunksTests_autogen_timestamp_deps
+[ 80%] Built target ClipboardChunksTests_autogen
+[ 81%] Built target ClipboardChunksTests
+[ 81%] Built target IKeyStateTests_autogen_timestamp_deps
+[ 81%] Built target IKeyStateTests_autogen
+[ 82%] Built target IKeyStateTests
+[ 82%] Built target KeyMapTests_autogen_timestamp_deps
+[ 83%] Built target KeyMapTests_autogen
+[ 84%] Built target KeyMapTests
+[ 84%] Built target KeyStateTests_autogen_timestamp_deps
+[ 84%] Built target KeyStateTests_autogen
+[ 85%] Built target KeyStateTests
+[ 85%] Built target KeyboardLayoutManagerTests_autogen_timestamp_deps
+[ 85%] Built target KeyboardLayoutManagerTests_autogen
+[ 86%] Built target KeyboardLayoutManagerTests
+[ 86%] Built target LoggerTests_autogen_timestamp_deps
+[ 87%] Built target LoggerTests_autogen
+[ 88%] Built target LoggerTests
+[ 88%] Built target ComputerTests_autogen_timestamp_deps
+[ 89%] Built target ComputerTests_autogen
+[ 89%] Built target ComputerTests
+[ 89%] Built target NetworkMonitorTests_autogen_timestamp_deps
+[ 89%] Built target NetworkMonitorTests_autogen
+[ 90%] Built target NetworkMonitorTests
+[ 90%] Built target SecureUtilsTests_autogen_timestamp_deps
+[ 90%] Built target SecureUtilsTests_autogen
+[ 91%] Built target SecureUtilsTests
+[ 91%] Built target FingerprintTests_autogen_timestamp_deps
+[ 91%] Built target FingerprintTests_autogen
+[ 92%] Built target FingerprintTests
+[ 92%] Built target FingerprintDatabaseTests_autogen_timestamp_deps
+[ 92%] Built target FingerprintDatabaseTests_autogen
+[ 93%] Built target FingerprintDatabaseTests
+[ 93%] Built target OSXKeyMapFallbackTests_autogen_timestamp_deps
+[ 93%] Built target OSXKeyMapFallbackTests_autogen
+[ 94%] Built target OSXKeyMapFallbackTests
+[ 94%] Built target OSXClipboardTests_autogen_timestamp_deps
+[ 94%] Built target OSXClipboardTests_autogen
+[ 95%] Built target OSXClipboardTests
+[ 95%] Built target OSXKeyStateTests_autogen_timestamp_deps
+[ 95%] Built target OSXKeyStateTests_autogen
+[ 96%] Built target OSXKeyStateTests
+[ 96%] Built target ServerConfigTests_autogen_timestamp_deps
+[ 97%] Built target ServerConfigTests_autogen
+[ 98%] Built target ServerConfigTests
+[ 98%] Built target ServerTests_autogen_timestamp_deps
+[ 98%] Built target ServerTests_autogen
+[ 99%] Built target ServerTests
+[ 99%] Built target ClientProxyTests_autogen_timestamp_deps
+[ 99%] Built target ClientProxyTests_autogen
+[100%] Built target ClientProxyTests
+Run CPack packaging tool...
+CPack: Create package using DragNDrop
+CPack: Install projects
+CPack: - Run preinstall target for: deskflow
+CPack: - Install project: deskflow []
+designated => identifier "deskflow-core" and anchor "/Users/runner/work/deskflow/deskflow/deploy/mac/input-build-signing.cer": No such file or directory
+invalid requirement specification
+CMake Error at /Users/runner/work/deskflow/deskflow/build/deploy/cmake_install.cmake:50 (execute_process):
+  execute_process failed command indexes:
+
+    1: "Child return code: 1"
+
+Call Stack (most recent call first):
+  /Users/runner/work/deskflow/deskflow/build/cmake_install.cmake:65 (include)
+
+
+CPack Error: Error when generating package: deskflow
+make: *** [package] Error 1
