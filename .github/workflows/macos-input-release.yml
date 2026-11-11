@@ -82,7 +82,7 @@ jobs:
         run: |
           mountpoint="$RUNNER_TEMP/verify-dmg"
           mkdir -p "$mountpoint"
-          hdiutil attach build/deskflow*.dmg -nobrowse -readonly -mountpoint "$mountpoint"
+          hdiutil attach build/deskflow*.dmg -nobrowse -readonly -mountpoint "$mountpoint" <<< 'Y'
           trap 'hdiutil detach "$mountpoint"' EXIT
           bash deploy/mac/verify-input-build.sh "$mountpoint/Deskflow.app" \
             "$PWD/deploy/mac/input-build-signing.cer" \
