@@ -75,14 +75,7 @@ jobs:
 
       - name: Package
         shell: bash
-        run: |
-          for attempt in 1 2 3; do
-            if cmake --build build --config Release --target package 2>&1 | tee -a package.log; then
-              exit 0
-            fi
-            sleep 2
-          done
-          exit 1
+        run: cmake --build build --config Release --target package 2>&1 | tee package.log
 
       - name: Verify shipped DMG and upgrade identity
         shell: bash
@@ -94,7 +87,8 @@ jobs:
           bash deploy/mac/verify-input-build.sh "$mountpoint/Deskflow.app" \
             "$PWD/deploy/mac/input-build-signing.cer" \
             'Deskflow Personal Builds (b1ghawk119)' "$PWD/signature-report.txt" 2>&1 | tee verification.log
-          "$mountpoint/Deskflow.app/Contents/MacOS/deskflow-core" --version
+          "$mountpoint/Deskflow.app/Contents/MacOS/deskflow-core" --version 2>&1 | tee -a verification.log
+          "$mountpoint/Deskflow.app/Contents/MacOS/Deskflow" --version 2>&1 | tee -a verification.log
 
       - name: Remove signing keychain
         if: always()

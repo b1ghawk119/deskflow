@@ -41,7 +41,7 @@ for identifier in org.deskflow.deskflow deskflow-core; do
   printf 'int main(void) { return 42; }\n' > "$scratch/changed.c"
   clang "$scratch/changed.c" -o "$scratch/changed"
   codesign --force --sign "$identity" --identifier "$identifier" --timestamp=none \
-    --requirements "designated => $expected" "$scratch/changed"
+    --requirements "=designated => $expected" "$scratch/changed"
   codesign --verify --strict -R="$actual" "$scratch/changed"
 
   # A matching identifier alone must not impersonate the signed application.

@@ -13,7 +13,7 @@ sign() {
   local target=$1 identifier=$2
   /usr/bin/codesign --force --options runtime --timestamp=none \
     --sign "$identity" --identifier "$identifier" \
-    --requirements "designated => identifier \"$identifier\" and anchor \"$certificate\"" \
+    --requirements "=designated => identifier \"$identifier\" and anchor \"$certificate\"" \
     "$target"
 }
 
