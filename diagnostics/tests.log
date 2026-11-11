@@ -1,0 +1,15 @@
+Test project /Users/runner/work/deskflow/deskflow/build/src/unittests
+    Start 17: KeyMapTests
+1/5 Test #17: KeyMapTests ......................   Passed    0.06 sec
+    Start 18: KeyStateTests
+2/5 Test #18: KeyStateTests ....................   Passed    0.02 sec
+    Start 19: KeyboardLayoutManagerTests
+3/5 Test #19: KeyboardLayoutManagerTests .......   Passed    0.02 sec
+    Start 26: OSXKeyMapFallbackTests
+4/5 Test #26: OSXKeyMapFallbackTests ...........   Passed    0.07 sec
+    Start 28: OSXKeyStateTests
+5/5 Test #28: OSXKeyStateTests .................   Passed    2.07 sec
+
+100% tests passed out of 5
+
+Total Test time (real) =   2.26 sec
