@@ -682,7 +682,7 @@ void OSXComputer::hideCursor()
   // appears to fix "mouse randomly not hiding" bug
   CGAssociateMouseAndMouseCursorPosition(true);
 
-  logCursorVisibility();
+  // An invisible cursor is expected here. Only check visibility after showing it.
 
   m_cursorHidden = true;
 }

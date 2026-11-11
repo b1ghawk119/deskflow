@@ -29,7 +29,7 @@ jobs:
         include:
           - arch: arm64
             runner: macos-15
-            qt: 6.11.3
+            qt: '6.12'
             deployment: '14'
     steps:
       - uses: actions/checkout@v4
@@ -41,12 +41,26 @@ jobs:
         with:
           qt-version: ${{ matrix.qt }}
 
+      - name: Import persistent personal signing identity
+        uses: ./.github/actions/codesign-keychain
+        with:
+          action: import
+          apple-codesign-p12: ${{ secrets.MAC_INPUT_CODESIGN_P12 }}
+          apple-codesign-p12-pwd: ${{ secrets.MAC_INPUT_CODESIGN_P12_PASSWORD }}
+
+      - name: Trust signing certificate on the disposable build runner
+        shell: bash
+        run: |
+          sudo security add-trusted-cert -d -r trustRoot -p codeSign \
+            -k "$RUNNER_TEMP/build.keychain" deploy/mac/input-build-signing.cer
+
       - name: Configure
         shell: bash
         run: |
           cmake -B build -DCMAKE_BUILD_TYPE=Release -DSKIP_BUILD_TESTS=ON \
             -DCMAKE_OSX_ARCHITECTURES="${{ matrix.arch }}" \
             -DCMAKE_OSX_DEPLOYMENT_TARGET="${{ matrix.deployment }}" \
+            -DMAC_INPUT_CODESIGN_IDENTITY='Deskflow Personal Builds (b1ghawk119)' \
             -DPACKAGE_VERSION_LABEL="mac-input-${GITHUB_SHA:0:8}" 2>&1 | tee configure.log
 
       - name: Build
@@ -57,25 +71,43 @@ jobs:
         env:
           QT_QPA_PLATFORM: offscreen
         shell: bash
-        run: ctest --test-dir build/src/unittests --output-on-failure -R '^(OSXKeyMapFallbackTests|KeyMapTests|KeyStateTests|KeyboardLayoutManagerTests)$' 2>&1 | tee tests.log
+        run: ctest --test-dir build/src/unittests --output-on-failure --no-tests=error -R '^(OSXKeyMapFallbackTests|OSXKeyStateTests|KeyMapTests|KeyStateTests|KeyboardLayoutManagerTests)$' 2>&1 | tee tests.log
 
       - name: Package
         shell: bash
         run: |
           for attempt in 1 2 3; do
-            if cmake --build build --config Release --target package; then
+            if cmake --build build --config Release --target package 2>&1 | tee -a package.log; then
               exit 0
             fi
             sleep 2
           done
           exit 1
 
+      - name: Verify shipped DMG and upgrade identity
+        shell: bash
+        run: |
+          mountpoint="$RUNNER_TEMP/verify-dmg"
+          mkdir -p "$mountpoint"
+          hdiutil attach build/deskflow*.dmg -nobrowse -readonly -mountpoint "$mountpoint"
+          trap 'hdiutil detach "$mountpoint"' EXIT
+          bash deploy/mac/verify-input-build.sh "$mountpoint/Deskflow.app" \
+            "$PWD/deploy/mac/input-build-signing.cer" \
+            'Deskflow Personal Builds (b1ghawk119)' "$PWD/signature-report.txt" 2>&1 | tee verification.log
+          "$mountpoint/Deskflow.app/Contents/MacOS/deskflow-core" --version
+
+      - name: Remove signing keychain
+        if: always()
+        uses: ./.github/actions/codesign-keychain
+        with:
+          action: cleanup
+
       - name: Save failure diagnostics
         if: failure()
         shell: bash
         run: |
           mkdir -p diagnostics
-          for file in configure.log build.log tests.log; do
+          for file in configure.log build.log tests.log package.log verification.log; do
             if [ -f "$file" ]; then cp "$file" diagnostics/; fi
           done
           if [ -z "$(ls -A diagnostics)" ]; then exit 0; fi
@@ -88,7 +120,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: deskflow-macos-${{ matrix.arch }}
-          path: build/deskflow*.dmg
+          path: |
+            build/deskflow*.dmg
+            signature-report.txt
           if-no-files-found: error
 
   release:
@@ -103,19 +137,28 @@ jobs:
           path: dist
           merge-multiple: true
 
+      - name: Collect installer
+        shell: bash
+        run: mv dist/build/*.dmg dist/
+
       - name: Checksums and release notes
         shell: bash
         run: |
           cd dist
           sha256sum *.dmg > SHA256SUMS.txt
           cat > release-notes.md <<'NOTES'
-          ARM64 build with fixes for IME keyboard mapping and local modifiers with a shared mouse.
+          ARM64 build based on upstream master 0d43a90 (2026-11-10), with fixes for IME keyboard mapping and local modifiers with a shared mouse.
           Temporary mouse-click and HID modifier diagnostic logging has been removed.
+          Expected cursor hiding no longer produces a visibility warning; checks after showing the cursor remain.
 
           Keep "Use server's keyboard language on this computer" disabled when using different input methods on Windows and Mac.
-          Allow Deskflow and deskflow-core in Accessibility and Input Monitoring if macOS requests access.
+          Install at /Applications/Deskflow.app, replacing the previous copy after quitting Deskflow.
+          This build switches from ad-hoc signing to a persistent personal signing certificate for both the app and deskflow-core.
+          macOS may require one new Accessibility / Input Monitoring authorization on this transition.
+          Future builds from this branch retain the same certificate and designated requirements; switching back to official builds changes identity again.
 
-          These installers are ad-hoc signed, without Apple notarization. They require testing with the actual Sogou input method and local keyboard.
+          The certificate is self-signed, not Apple Developer ID, and the installer is not notarized. Use macOS Privacy & Security > Open Anyway if Gatekeeper blocks the first launch; no system-wide security changes are needed.
+          CI verifies the mounted DMG, ARM64 binaries, signatures, absence of development entitlements, and that a changed signed binary satisfies the shipped upgrade identity while an ad-hoc impostor does not. Actual permission retention across upgrades must be confirmed on the user's Mac.
           NOTES
 
       - name: Publish installers
@@ -130,3 +173,4 @@ jobs:
           files: |
             dist/*.dmg
             dist/SHA256SUMS.txt
+            dist/signature-report.txt

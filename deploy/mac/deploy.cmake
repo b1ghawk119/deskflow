@@ -13,11 +13,29 @@ if (OSX_BUNDLE)
   if (APPLE_CODESIGN_DEV)
     set(_codesign_identity "${APPLE_CODESIGN_DEV}")
   endif()
+  # Personal release signing is separate from development signing: it must not
+  # enable the debugger/JIT entitlements from entitlements-dev.plist.
+  set(MAC_INPUT_CODESIGN_IDENTITY "" CACHE STRING "Persistent identity for personal macOS input-fix packages")
+  set(_timestamp_arg "-timestamp")
+  if(MAC_INPUT_CODESIGN_IDENTITY)
+    set(_codesign_identity "${MAC_INPUT_CODESIGN_IDENTITY}")
+    set(_timestamp_arg "")
+  endif()
   install(CODE "execute_process(COMMAND
     ${DEPLOYQT}
     \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_PROJECT_PROPER_NAME}.app\"
-    -hardened-runtime -timestamp \"-codesign=${_codesign_identity}\"
+    -hardened-runtime ${_timestamp_arg} \"-codesign=${_codesign_identity}\"
+    COMMAND_ERROR_IS_FATAL ANY
   )")
+  if(MAC_INPUT_CODESIGN_IDENTITY)
+    install(CODE "execute_process(COMMAND /bin/bash
+      \"${MY_DIR}/sign-input-build.sh\"
+      \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_PROJECT_PROPER_NAME}.app\"
+      \"${MAC_INPUT_CODESIGN_IDENTITY}\"
+      \"${MY_DIR}/input-build-signing.cer\"
+      COMMAND_ERROR_IS_FATAL ANY
+    )")
+  endif()
   set(CPACK_PACKAGE_ICON "${MY_DIR}/dmg-volume.icns")
   set(CPACK_DMG_BACKGROUND_IMAGE "${MY_DIR}/dmg-background.tiff")
   set(CPACK_DMG_DS_STORE_SETUP_SCRIPT "${MY_DIR}/generate_ds_store.applescript")
